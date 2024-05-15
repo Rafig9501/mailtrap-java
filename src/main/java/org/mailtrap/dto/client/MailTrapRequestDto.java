@@ -25,6 +25,7 @@ public class MailTrapRequestDto {
     private Map<String, String> headers;
     private String subject;
     private String text;
+    private String html;
     private String category;
 
     @JsonProperty("custom_variables")

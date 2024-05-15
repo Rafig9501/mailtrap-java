@@ -9,10 +9,10 @@ import org.mailtrap.service.MailSenderService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/mail-sender")
@@ -25,9 +25,9 @@ public class MailSenderController {
     @Operation(description = "Send Email",
             responses = @ApiResponse(responseCode = "200"))
     @PostMapping(path = "/send",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ResponseDto> sendEmail(@RequestBody MailSenderDto dto) {
-        return ResponseEntity.ok(mailSenderService.sendEmail(dto));
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseDto> sendEmail(@RequestPart MailSenderDto dto,
+                                                 @RequestPart(required = false) List<MultipartFile> attachments) {
+        return ResponseEntity.ok(mailSenderService.sendEmail(dto, attachments));
     }
 }

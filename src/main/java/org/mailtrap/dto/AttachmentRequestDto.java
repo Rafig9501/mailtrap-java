@@ -1,13 +1,7 @@
 package org.mailtrap.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.*;
 
 @Builder
 @Setter
@@ -18,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AttachmentRequestDto {
 
-    private MultipartFile attachment;
+//    private MultipartFile attachment;
     private String fileName;
     private String fileType;
     private String fileDisposition;

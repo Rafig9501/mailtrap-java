@@ -1,15 +1,8 @@
 package org.mailtrap.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.mailtrap.dto.client.EmailDto;
-
-import java.util.List;
 
 
 @Builder
@@ -28,5 +21,4 @@ public class MailSenderDto {
     private String subject;
     private String text;
     private String html;
-    private List<AttachmentRequestDto> attachment;
 }
