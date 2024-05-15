@@ -1,12 +1,15 @@
 package org.mailtrap.dto;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
-import org.mailtrap.dto.client.AttachmentDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.mailtrap.dto.client.EmailDto;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 @Builder

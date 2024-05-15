@@ -1,7 +1,5 @@
 package org.mailtrap.service.impl;
 
-import java.util.List;
-
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.mailtrap.client.MailTrapClient;
@@ -11,7 +9,6 @@ import org.mailtrap.dto.client.ResponseDto;
 import org.mailtrap.mapper.MailMapper;
 import org.mailtrap.service.MailSenderService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Service

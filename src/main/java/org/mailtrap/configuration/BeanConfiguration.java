@@ -1,11 +1,8 @@
 package org.mailtrap.configuration;
 
-import java.util.List;
-
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.annotations.OpenAPI31;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.servers.Server;
 import lombok.RequiredArgsConstructor;
 import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;
