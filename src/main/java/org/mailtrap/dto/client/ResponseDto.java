@@ -17,6 +17,7 @@ import java.util.List;
 public class ResponseDto {
 
     private Boolean success;
+    private List<String> errors;
 
     @JsonProperty("message_ids")
     private List<String> messageIds;

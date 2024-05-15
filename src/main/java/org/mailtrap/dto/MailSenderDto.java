@@ -1,7 +1,11 @@
 package org.mailtrap.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import org.mailtrap.dto.client.AttachmentDto;
+import org.mailtrap.dto.client.EmailDto;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -17,14 +21,9 @@ public class MailSenderDto {
     private RecipientDto to;
     private RecipientDto cc;
     private RecipientDto bcc;
-    private String emailFrom;
-    private String recipientName;
+    private EmailDto emailFrom;
     private String subject;
     private String text;
     private String html;
-    private MultipartFile attachment;
-    private String category;
-    private String attachmentName;
-    private String attachmentType;
-    private String attachmentDisposition;
+    private List<AttachmentRequestDto> attachment;
 }
