@@ -1,0 +1,15 @@
+server:
+  servlet:
+    context-path: /mail-sender
+  port: 8080
+
+spring:
+  application:
+    name: mail-sender
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui
+    operations-sorter: method
