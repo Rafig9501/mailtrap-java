@@ -12,7 +12,6 @@ import lombok.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AttachmentRequestDto {
 
-//    private MultipartFile attachment;
     private String fileName;
     private String fileType;
     private String fileDisposition;

@@ -1,21 +1,24 @@
 package org.mailtrap.client;
 
-import java.io.IOException;
-
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 import lombok.RequiredArgsConstructor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.mailtrap.exception.ClientException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
 @Service
@@ -31,8 +34,8 @@ public class MailTrapClient {
 
     private final OkHttpClient client;
 
-
-    public String sendEmail(String requestJson) {
+    @Async
+    public CompletableFuture<String> sendEmail(String requestJson) {
         RequestBody requestBody = RequestBody.create(requestJson, MediaType.parse(APPLICATION_JSON_VALUE));
         Request httpRequest = new Request.Builder()
                 .url(MAILTRAP_API)
@@ -42,11 +45,11 @@ public class MailTrapClient {
                 .build();
         try (Response response = client.newCall(httpRequest).execute()){
             if (response.body() != null) {
-                return response.body().string();
+                return CompletableFuture.completedFuture(response.body().string());
             }
-            return null;
+            return CompletableFuture.completedFuture(null);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ClientException(e.getMessage());
         }
     }
 }

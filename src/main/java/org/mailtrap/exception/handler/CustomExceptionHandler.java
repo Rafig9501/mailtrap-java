@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.mailtrap.exception.ClientException;
+import org.mailtrap.exception.MappingException;
 import org.mailtrap.util.ExceptionMessage;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -44,7 +45,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.joining(", "));
-        return getResponseEntity(ex, status, request, errorDetails, ExceptionMessage.INPUT_VALIDATION);
+        return getResponseEntity(ex, status, request, errorDetails, ExceptionMessage.INPUT_VALIDATION_EXCEPTION);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
                                                                          HttpHeaders headers, HttpStatusCode status,
                                                                          WebRequest request) {
-        return getResponseEntity(ex, status, request, ex.getMessage(), ExceptionMessage.METHOD_NOT_SUPPORTED);
+        return getResponseEntity(ex, status, request, ex.getMessage(), ExceptionMessage.METHOD_NOT_SUPPORTED_EXCEPTION);
     }
 
     private ResponseEntity<Object> buildResponseEntity(Exception ex, WebRequest request) {
@@ -67,13 +68,16 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                     .map(ConstraintViolation::getMessage)
                     .collect(Collectors.joining(", "));
             return getResponseEntity(ex, HttpStatus.BAD_REQUEST, request, errorDetail,
-                    ExceptionMessage.INPUT_VALIDATION);
+                    ExceptionMessage.INPUT_VALIDATION_EXCEPTION);
         } else if (ex instanceof BadRequestException) {
             return getResponseEntity(ex, HttpStatus.BAD_REQUEST, request, ex.getMessage(),
                     ExceptionMessage.BAD_REQUEST_EXCEPTION);
         } else if (ex instanceof ClientException) {
             return getResponseEntity(ex, HttpStatus.SERVICE_UNAVAILABLE, request, ex.getMessage(),
-                    ExceptionMessage.SERVICE_UNAVAILABLE);
+                    ExceptionMessage.SERVICE_UNAVAILABLE_EXCEPTION);
+        } else if (ex instanceof MappingException) {
+            return getResponseEntity(ex, HttpStatus.UNSUPPORTED_MEDIA_TYPE, request, ex.getMessage(),
+                    ExceptionMessage.ATTACHMENT_EXCEPTION);
         } else {
             return getResponseEntity(ex, HttpStatus.INTERNAL_SERVER_ERROR, request, ex.getMessage(),
                     ExceptionMessage.INTERNAL_ERROR);

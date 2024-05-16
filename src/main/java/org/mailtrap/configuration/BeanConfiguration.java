@@ -20,7 +20,10 @@ public class BeanConfiguration {
 
     @Bean
     public OpenAPI myOpenAPI() {
-        Info info = new Info().title("Mailtrap Service").version("1.0.0").description("Mailtrap email sending application");
+        Info info = new Info()
+                .title("Mailtrap Service")
+                .version("1.0.0")
+                .description("Mailtrap email sending application");
         return new OpenAPI().info(info);
     }
 }
