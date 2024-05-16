@@ -1,4 +1,4 @@
-package org.mailtrap.impl;
+package org.mailtrap.service.impl;
 
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,6 @@ import org.mailtrap.dto.MailSenderDto;
 import org.mailtrap.dto.client.MailTrapRequestDto;
 import org.mailtrap.dto.client.ResponseDto;
 import org.mailtrap.mapper.MailMapper;
-import org.mailtrap.service.impl.MailSenderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
